@@ -43,13 +43,6 @@ jobs:
           pwd
           pre-commit run --all-files
 
-      - name: Configure MemPlumber for Static analysis
-        run: cmake -S . -B "$BUILD_DIR"
-
-      #- name: Run clang-tidy on changed files
-      #  run: |
-      #    ./ci/clang-tidy-all.sh changed "$BUILD_DIR"
-
 #  linux:
 #    runs-on: ${{ matrix.runner }}
 #    container: seladb/${{ matrix.image }}
