@@ -52,7 +52,7 @@ jobs:
       matrix:
         include: # Check the images at https://github.com/seladb/PcapPlusPlus-DockerImages
           - runner: ubuntu-latest
-            image: ubuntu2404
+            image: ubuntu2604
           - runner: ubuntu-latest
             image: rhel94
           - runner: ubuntu-latest
@@ -100,10 +100,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - os-version: macos-13
+          - os-version: macos-26-intel
             host-arch: x86_64
             arch: x86_64
-          - os-version: macos-13
+          - os-version: macos-26
             host-arch: arm64
             arch: arm64
 
@@ -199,9 +199,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows-2022
-            platform: "Visual Studio 17 2022"
+          - os: windows-2025
+            platform: "Visual Studio 18 2026"
             arch: "x64"
+          - os: windows-2025
+            platform: "Visual Studio 18 2026"
+            arch: Win32
 
     runs-on: ${{ matrix.os }}
     steps:
