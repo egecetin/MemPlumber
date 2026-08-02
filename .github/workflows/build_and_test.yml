@@ -94,9 +94,6 @@ jobs:
           - os-version: macos-26-intel
             host-arch: x86_64
             arch: x86_64
-          #- os-version: macos-26
-          #  host-arch: arm64
-          #  arch: arm64
 
     steps:
       - name: Checkout code
