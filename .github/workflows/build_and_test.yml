@@ -26,7 +26,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt install python3-dev python3-venv
+          sudo apt install python3-dev python3-venv
           git clone --branch $CPPCHECK_VERSION --single-branch https://github.com/danmar/cppcheck.git
           cd cppcheck && mkdir build && cd build && cmake .. && cmake --build . && cmake --install . && cd ../../ && rm -rf cppcheck
           python3 -m venv .venv
