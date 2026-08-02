@@ -14,14 +14,13 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    container: seladb/ubuntu2204
     permissions:
       security-events: write
 
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp' ]
+        languages: cpp
 
     steps:
     - name: Checkout repository
