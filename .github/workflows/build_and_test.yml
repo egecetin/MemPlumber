@@ -125,16 +125,13 @@ jobs:
 
   freebsd:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: ["15.1", "14.1"]
     steps:
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     - name: Test in FreeBSD
       id: test
       uses: vmactions/freebsd-vm@77ed28d336d03fe19a3f4f7266c1d2c4714dd79d # v1.5.2
       with:
-        release: ${{ matrix.version }}
+        release: "15.1"
         usesh: true
         prepare: pkg install -y cmake git gmake
 
