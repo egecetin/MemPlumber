@@ -301,7 +301,7 @@ public:
 				if (verbose)
 				{
 					fprintf(dumper, "Found leaked object at 0x%p (size %d[bytes]) allocated in: %s:%d\n",
-					        reinterpret_cast<char*>(metaDataBucketLinkedListElement) + sizeof(new_ptr_list_t),
+					        reinterpret_cast<const char*>(metaDataBucketLinkedListElement) + sizeof(new_ptr_list_t),
 					        static_cast<int>(metaDataBucketLinkedListElement->size),
 					        metaDataBucketLinkedListElement->file, metaDataBucketLinkedListElement->line);
 				}
@@ -342,7 +342,7 @@ public:
 				if (verbose)
 				{
 					fprintf(dumper, "Static object allocated at 0x%p (size %d[bytes]) allocated in: %s:%d\n",
-					        reinterpret_cast<char*>(metaDataBucketLinkedListElement) + sizeof(new_ptr_list_t),
+					        reinterpret_cast<const char*>(metaDataBucketLinkedListElement) + sizeof(new_ptr_list_t),
 					        static_cast<int>(metaDataBucketLinkedListElement->size),
 					        metaDataBucketLinkedListElement->file, metaDataBucketLinkedListElement->line);
 				}
@@ -486,7 +486,7 @@ void operator delete(void* pointer) throw()
 	operator delete(pointer, __FILE__, __LINE__);
 }
 
-void operator delete(void* pointer, std::size_t size)
+void operator delete(void* pointer, std::size_t size) _NOEXCEPT
 {
 	operator delete(pointer, __FILE__, __LINE__);
 }
@@ -496,7 +496,7 @@ void operator delete[](void* pointer) _NOEXCEPT
 	operator delete(pointer, __FILE__, __LINE__);
 }
 
-void operator delete[](void* pointer, std::size_t size)
+void operator delete[](void* pointer, std::size_t size) _NOEXCEPT
 {
 	operator delete(pointer, __FILE__, __LINE__);
 }
