@@ -42,7 +42,7 @@ private:
 	bool m_Started;
 	int m_ProgramStarted;
 	bool m_Verbose;
-	FILE* m_Dumper{nullptr};
+	FILE* m_Dumper{ nullptr };
 
 	// private c'tor
 	MemPlumberInternal()
@@ -95,7 +95,7 @@ private:
 		}
 	}
 
-	void closeFile(FILE* file)
+	static void closeFile(FILE* file)
 	{
 		if (file)
 		{
@@ -283,7 +283,7 @@ public:
 		// go over all buckets in the hashmap
 		for (int index = 0; index < MEMPLUMBER_HASHTABLE_SIZE; ++index)
 		{
-			new_ptr_list_t* metaDataBucketLinkedListElement = m_PointerListHashtable[index];
+			const new_ptr_list_t* metaDataBucketLinkedListElement = m_PointerListHashtable[index];
 
 			// if bucket is empty - continue
 			if (metaDataBucketLinkedListElement == nullptr)
@@ -327,7 +327,7 @@ public:
 
 		for (int index = 0; index < MEMPLUMBER_HASHTABLE_SIZE; ++index)
 		{
-			new_ptr_list_t* metaDataBucketLinkedListElement = m_StaticPointerListHashtable[index];
+			const new_ptr_list_t* metaDataBucketLinkedListElement = m_StaticPointerListHashtable[index];
 
 			// if bucket is empty - continue
 			if (metaDataBucketLinkedListElement == nullptr)
@@ -408,9 +408,10 @@ const char* getCaller()
 {
 	return "Unknown";
 }
-#elif defined(__has_include) && __has_include(<execinfo.h>)
+#elif defined(__has_include)
+#	if __has_include(<execinfo.h>)
 // Check if execinfo.h is available (glibc systems)
-#	include <execinfo.h>
+#		include <execinfo.h>
 const char* getCaller()
 {
 	void* backtraceArr[3];
@@ -430,6 +431,13 @@ const char* getCaller()
 	// the caller is second in the backtrace
 	return backtraceSymbols[2];
 }
+#	else
+// Systems without execinfo.h (e.g., Alpine Linux with musl libc)
+const char* getCaller()
+{
+	return "Unknown";
+}
+#	endif
 #else
 // Systems without execinfo.h (e.g., Alpine Linux with musl libc)
 const char* getCaller()
