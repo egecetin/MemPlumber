@@ -408,7 +408,8 @@ const char* getCaller()
 {
 	return "Unknown";
 }
-#else
+#elif defined(__has_include) && __has_include(<execinfo.h>)
+// Check if execinfo.h is available (glibc systems)
 #	include <execinfo.h>
 const char* getCaller()
 {
@@ -428,6 +429,12 @@ const char* getCaller()
 
 	// the caller is second in the backtrace
 	return backtraceSymbols[2];
+}
+#else
+// Systems without execinfo.h (e.g., Alpine Linux with musl libc)
+const char* getCaller()
+{
+	return "Unknown";
 }
 #endif
 

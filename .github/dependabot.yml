@@ -4,7 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    target-branch: "dev"
     labels:
     - "automated-pr"
     groups:
