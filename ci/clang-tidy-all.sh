@@ -16,9 +16,9 @@ MODE=${1:-all}
 BUILD_DIR=${2:-build}
 
 if [ "$MODE" = "changed" ]; then
-    # Get the list of changed files from origin/dev
-    git fetch origin dev
-    files=$(git diff --name-only origin/dev -- '*.cpp' '*.h' || true)
+    # Get the list of changed files from origin/master
+    git fetch origin master
+    files=$(git diff --name-only origin/master -- '*.cpp' '*.h' || true)
 else
     # Find all relevant files
     files=$(find "${ROOTPATH}" -type f \( -name '*.cpp' -o -name '*.h' \))
